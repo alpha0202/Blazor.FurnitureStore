@@ -1,0 +1,2 @@
+﻿1- Add-migration Nombre
+2- Update-Database

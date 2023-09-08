@@ -1,8 +1,12 @@
 using Blazor.FurnitureStore.Server.Data;
 using Blazor.FurnitureStore.Server.Models;
 using Microsoft.AspNetCore.Authentication;
+using Blazor.FurnitureStore.Repositories;
 using Microsoft.AspNetCore.ResponseCompression;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.AspNetCore.Identity;
+using Microsoft.Data.SqlClient;
+using System.Data;
 
 namespace Blazor.FurnitureStore
 {
@@ -17,6 +21,15 @@ namespace Blazor.FurnitureStore
             builder.Services.AddDbContext<ApplicationDbContext>(options =>
                 options.UseSqlServer(connectionString));
             builder.Services.AddDatabaseDeveloperPageExceptionFilter();
+
+            //inyectar conexión a bd desde el appsetting
+            var dbConnectionString = builder.Configuration.GetConnectionString("DefaultConnection");
+            builder.Services.AddSingleton<IDbConnection>((sp) => new SqlConnection(dbConnectionString));
+
+
+            //inyectar el repositorio
+            builder.Services.AddScoped<IProductCategoryRepository, ProductCategoryRepository>();
+
 
             builder.Services.AddDefaultIdentity<ApplicationUser>(options => options.SignIn.RequireConfirmedAccount = true)
                 .AddEntityFrameworkStores<ApplicationDbContext>();

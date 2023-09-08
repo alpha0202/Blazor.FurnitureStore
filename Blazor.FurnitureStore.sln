@@ -3,11 +3,13 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 17
 VisualStudioVersion = 17.7.34024.191
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Blazor.FurnitureStore.Server", "Blazor.FurnitureStore\Server\Blazor.FurnitureStore.Server.csproj", "{FA1EF98E-5B4C-4B71-BC88-3002E4B8D5B7}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Blazor.FurnitureStore.Server", "Blazor.FurnitureStore\Server\Blazor.FurnitureStore.Server.csproj", "{FA1EF98E-5B4C-4B71-BC88-3002E4B8D5B7}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Blazor.FurnitureStore.Client", "Blazor.FurnitureStore\Client\Blazor.FurnitureStore.Client.csproj", "{47D8813D-058D-4FCE-9167-CB79FC7CA942}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Blazor.FurnitureStore.Client", "Blazor.FurnitureStore\Client\Blazor.FurnitureStore.Client.csproj", "{47D8813D-058D-4FCE-9167-CB79FC7CA942}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Blazor.FurnitureStore.Shared", "Blazor.FurnitureStore\Shared\Blazor.FurnitureStore.Shared.csproj", "{025D74D5-365B-4E45-AB09-60E27535DF67}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Blazor.FurnitureStore.Shared", "Blazor.FurnitureStore\Shared\Blazor.FurnitureStore.Shared.csproj", "{025D74D5-365B-4E45-AB09-60E27535DF67}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Blazor.FurnitureStore.Repositories", "Blazor.FurnitureStore.Repositories\Blazor.FurnitureStore.Repositories.csproj", "{AFD3878D-D1A8-439F-83A2-34550BA32628}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -27,6 +29,10 @@ Global
 		{025D74D5-365B-4E45-AB09-60E27535DF67}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{025D74D5-365B-4E45-AB09-60E27535DF67}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{025D74D5-365B-4E45-AB09-60E27535DF67}.Release|Any CPU.Build.0 = Release|Any CPU
+		{AFD3878D-D1A8-439F-83A2-34550BA32628}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{AFD3878D-D1A8-439F-83A2-34550BA32628}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{AFD3878D-D1A8-439F-83A2-34550BA32628}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{AFD3878D-D1A8-439F-83A2-34550BA32628}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
