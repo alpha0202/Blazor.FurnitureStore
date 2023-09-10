@@ -1,4 +1,5 @@
 ﻿using Blazor.FurnitureStore.Shared;
+using Dapper;
 using System;
 using System.Collections.Generic;
 using System.Data;
@@ -18,9 +19,11 @@ namespace Blazor.FurnitureStore.Repositories
             _dbConnection = dbConnection;
         }
 
-        public Task<IEnumerable<ProductCategory>> GetAll()
+        public async Task<IEnumerable<ProductCategory>> GetAll()
         {
-            throw new NotImplementedException();
+            var sql = "SELECT Id, Name FROM ProductCategories";
+
+            return await _dbConnection.QueryAsync<ProductCategory>(sql, new {});
         }
     }
 }

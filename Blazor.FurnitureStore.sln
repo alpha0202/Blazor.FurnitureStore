@@ -9,7 +9,7 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Blazor.FurnitureStore.Clien
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Blazor.FurnitureStore.Shared", "Blazor.FurnitureStore\Shared\Blazor.FurnitureStore.Shared.csproj", "{025D74D5-365B-4E45-AB09-60E27535DF67}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Blazor.FurnitureStore.Repositories", "Blazor.FurnitureStore.Repositories\Blazor.FurnitureStore.Repositories.csproj", "{AFD3878D-D1A8-439F-83A2-34550BA32628}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Blazor.FurnitureStore.Repositories", "Blazor.FurnitureStore.Repositories\Blazor.FurnitureStore.Repositories.csproj", "{AFD3878D-D1A8-439F-83A2-34550BA32628}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
