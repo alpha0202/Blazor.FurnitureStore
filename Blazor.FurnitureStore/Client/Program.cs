@@ -3,6 +3,7 @@ using Blazor.FurnitureStore.Client.Services;
 using Microsoft.AspNetCore.Components.Web;
 using Microsoft.AspNetCore.Components.WebAssembly.Authentication;
 using Microsoft.AspNetCore.Components.WebAssembly.Hosting;
+using Radzen;
 
 namespace Blazor.FurnitureStore.Client
 {
@@ -23,6 +24,8 @@ namespace Blazor.FurnitureStore.Client
             builder.Services.AddScoped(sp => sp.GetRequiredService<IHttpClientFactory>().CreateClient("Blazor.FurnitureStore.ServerAPI"));
 
             builder.Services.AddApiAuthorization();
+
+            builder.Services.AddRadzenComponents();
 
             await builder.Build().RunAsync();
         }
