@@ -29,6 +29,7 @@ namespace Blazor.FurnitureStore
 
             //inyectar el repositorio
             builder.Services.AddScoped<IProductCategoryRepository, ProductCategoryRepository>();
+            builder.Services.AddScoped<IProductRepository, ProductRepository>();
 
 
             builder.Services.AddDefaultIdentity<ApplicationUser>(options => options.SignIn.RequireConfirmedAccount = true)

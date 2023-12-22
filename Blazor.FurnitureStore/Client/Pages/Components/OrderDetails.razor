@@ -1,21 +1,49 @@
 ﻿@page "/orderdetails"
 
 @inject IProductCategoryService ProductCategoryService
+@inject IProductService ProductService
 
 <h3>Order Details</h3>
+<p><strong>@Message</strong></p>
 
 @if (productCategories != null && Order != null)
 {
-    <EditForm Model="@Order">
-        <InputSelect class="form-control col-sm-5" @bind-Value="@Order.ProductCategoryId">
-            @foreach(var item in productCategories)
-            {
-                <option value="@item.Id">@item.Name</option>
-            }
+    <div class="card">
+        <div class="card-body m-1 bg-opacity-10 p-5">
+            <EditForm Model="@Order">
+                <InputSelect class="form-control col-sm-5" 
+                             Value="@Order.ProductCategoryId"
+                             ValueChanged="@((int productCategoryId) => ProductCategoryHasChanged( productCategoryId))"
+                             ValueExpression="@(() => Order.ProductCategoryId)">
+                    @foreach (var item in productCategories)
+                    {
+                        <option value="@item.Id">@item.Name</option>
+                    }
 
-        </InputSelect>
+                </InputSelect>
 
-    </EditForm>
+            </EditForm>
+
+        </div>
+
+        <div class="card-title">
+            <label>Products</label>
+            <div class="card-body m-1 bg-opacity-10 p-5">
+                <EditForm Model="@Order">
+                    <InputSelect class="form-control col-sm-5" @bind-Value="@ProductId">
+                        @foreach (var item in Products)
+                        {
+                            <option value="@item.Id">@item.Name</option>
+                        }
+
+                    </InputSelect>
+
+                </EditForm>
+
+            </div>
+        </div>
+
+    </div>
 }
 else
 {
@@ -29,6 +57,8 @@ else
 @code {
     public Order Order;
     public IEnumerable<ProductCategory> productCategories;
+    public IEnumerable<Product> Products { get; set; }
+    public string ProductId { get; set; }
     public string Message { get; set; }
 
 
@@ -36,14 +66,30 @@ else
     {
         try
         {
-            Order = new Order();
+            Order = new Order() {ProductCategoryId = 1};
             productCategories = await ProductCategoryService.GetProductCategories();
+            await LoadProducts(Order.ProductCategoryId);
         }
         catch (Exception e)
         {
 
             Message = $"There was an error...{e.Message}";
         }
+    }
+
+    protected async Task ProductCategoryHasChanged(int productCategoryId)
+    {
+        Order.ProductCategoryId = productCategoryId;
+
+        if (Order.ProductCategoryId > 0)
+            await LoadProducts(Order.ProductCategoryId);
+
+
+    }
+
+    private async Task LoadProducts(int productCategoryId)
+    {
+        Products = await ProductService.GetByCategory(productCategoryId);
     }
 
 }
