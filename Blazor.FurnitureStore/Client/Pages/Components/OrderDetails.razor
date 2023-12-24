@@ -8,10 +8,12 @@
 
 @if (productCategories != null && Order != null)
 {
-    <div class="card">
+    <div class="card" style="width: 22rem;">
         <div class="card-body m-1 bg-opacity-10 p-5">
+            <h5 class="card-title">Categories</h5>
             <EditForm Model="@Order">
-                <InputSelect class="form-control col-sm-5" 
+                
+                <InputSelect class="form-select col-sm-5" 
                              Value="@Order.ProductCategoryId"
                              ValueChanged="@((int productCategoryId) => ProductCategoryHasChanged( productCategoryId))"
                              ValueExpression="@(() => Order.ProductCategoryId)">
@@ -22,26 +24,26 @@
 
                 </InputSelect>
 
+                <br />
+
+                <h5 class="card-title">Products</h5>
+                <InputSelect class="form-select col-sm-5" @bind-Value="@ProductId">
+                    @foreach (var item in Products)
+                    {
+                        <option value="@item.Id">@item.Name</option>
+                    }
+
+                </InputSelect>
+
             </EditForm>
 
+            
         </div>
 
-        <div class="card-title">
-            <label>Products</label>
-            <div class="card-body m-1 bg-opacity-10 p-5">
-                <EditForm Model="@Order">
-                    <InputSelect class="form-control col-sm-5" @bind-Value="@ProductId">
-                        @foreach (var item in Products)
-                        {
-                            <option value="@item.Id">@item.Name</option>
-                        }
 
-                    </InputSelect>
 
-                </EditForm>
+          
 
-            </div>
-        </div>
 
     </div>
 }
