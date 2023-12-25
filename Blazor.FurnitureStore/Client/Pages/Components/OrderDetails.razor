@@ -3,37 +3,104 @@
 @inject IProductCategoryService ProductCategoryService
 @inject IProductService ProductService
 
-<h3>Order Details</h3>
 <p><strong>@Message</strong></p>
 
 @if (productCategories != null && Order != null)
 {
-    <div class="card" style="width: 22rem;">
-        <div class="card-body m-1 bg-opacity-10 p-5">
-            <h5 class="card-title">Categories</h5>
+    <div class="card" style="width: 55rem;">
+        <h5 class="card-title">Order Details</h5>
+        <div class="card-body m-1 bg-opacity-10 ">
             <EditForm Model="@Order">
-                
-                <InputSelect class="form-select col-sm-5" 
-                             Value="@Order.ProductCategoryId"
-                             ValueChanged="@((int productCategoryId) => ProductCategoryHasChanged( productCategoryId))"
-                             ValueExpression="@(() => Order.ProductCategoryId)">
-                    @foreach (var item in productCategories)
-                    {
-                        <option value="@item.Id">@item.Name</option>
-                    }
+                <div class="container">
+                    <div class="row">
+                        <div class="col-md-4 mb-3">
 
-                </InputSelect>
+                        </div>
+                        <div class="col-md-4 mb-3">
+                            <input type="submit" class="btn btn-success" value="Save"/>
+                            <input type="button" class="btn btn-secondary" value="Cancel"/>
+                        </div>
+                        <div class="col-md-4 mb-3">
+                        </div>
+                    </div>
+                    <div class="row">
+                       
+                        <div class="col-md-6 mb-3">
+                           <label for="">Number</label>
+                           <InputNumber class="form-control"@bind-Value="@Order.OrderNumber"/>
+                        </div>
+                        <div class="col-md-6 mb-3">
+                            <label for="">Order Date</label>
+                            <InputDate class="form-control" @bind-Value="@Order.OrderDate" />
+                        </div>
+                    </div>
+                    <div class="row">
 
-                <br />
+                        <div class="col-md-12 mb-3">
+                            <label for="">Client</label>
+                            <InputSelect class="form-select" @bind-Value="@Order.ClientId">
 
-                <h5 class="card-title">Products</h5>
-                <InputSelect class="form-select col-sm-5" @bind-Value="@ProductId">
-                    @foreach (var item in Products)
-                    {
-                        <option value="@item.Id">@item.Name</option>
-                    }
 
-                </InputSelect>
+                            </InputSelect>
+                        </div>
+
+                        <div class="row">
+
+                            <div class="col-md-6 mb-3">
+                                <label for="">Delivery Date</label>
+                                <InputDate class="form-control" @bind-Value="@Order.DeliveryDate" />
+                            </div>
+                            <div class="col-md-6 mb-3">
+                                <label for="">Total</label>
+                                <InputNumber class="form-control" @bind-Value="@Order.Total" />
+                            </div>
+                        </div>
+                       
+                    </div>
+                </div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+                <div class="container" style="width: 18rem;align-items:start">
+                    <h5 class="card-title">Categories</h5>
+                    <InputSelect class="form-select col-sm-5"
+                                 Value="@Order.ProductCategoryId"
+                                 ValueChanged="@((int productCategoryId) => ProductCategoryHasChanged( productCategoryId))"
+                                 ValueExpression="@(() => Order.ProductCategoryId)">
+                        @foreach (var item in productCategories)
+                        {
+                            <option value="@item.Id">@item.Name</option>
+                        }
+
+                    </InputSelect>
+
+                    <br />
+
+                    <h5 class="card-title">Products</h5>
+                    <InputSelect class="form-select col-sm-5" @bind-Value="@ProductId">
+                        @foreach (var item in Products)
+                        {
+                            <option value="@item.Id">@item.Name</option>
+                        }
+
+                    </InputSelect>
+
+                </div>
+
 
             </EditForm>
 
