@@ -1,0 +1,42 @@
+﻿@inject IProductCategoryService productCatService
+@inject IProductService productService
+
+<MudDialog>
+    <TitleContent>
+        Product Details
+    </TitleContent>
+    <DialogContent>
+        <EditForm Model="@Product">
+            <div class="card">
+                <div class="card-body">
+                    <div class="container">
+
+                        <div class="row">
+                            <div class="col-md-6 mb-3">
+                                <label for="">Category</label>
+
+                            </div>
+                            <div class="col-md-6 mb-3">
+                                <label for="">Product</label>
+
+                            </div>
+
+                        </div>
+
+                    </div>
+
+                </div>
+            </div>
+        </EditForm>
+    </DialogContent>
+    <DialogActions>
+        <MudButton>Cancel</MudButton>
+        <MudButton Color="Color.Primary">Add</MudButton>
+    </DialogActions>
+</MudDialog>
+
+
+
+@code {
+    public Product Product = new Product();
+}

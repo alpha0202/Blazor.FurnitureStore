@@ -2,6 +2,10 @@
 
 @inject IProductCategoryService ProductCategoryService
 @inject IProductService ProductService
+@inject IClientService clientService
+@inject IOrderService orderService
+@attribute [Authorize]
+@inject NavigationManager nav
 
 <p><strong>@Message</strong></p>
 
@@ -10,7 +14,7 @@
     <div class="card" style="width: 55rem;">
         <h5 class="card-title">Order Details</h5>
         <div class="card-body m-1 bg-opacity-10 ">
-            <EditForm Model="@Order">
+            <EditForm Model="@Order" OnValidSubmit="SaveOrder">
                 <div class="container">
                     <div class="row">
                         <div class="col-md-4 mb-3">
@@ -18,7 +22,7 @@
                         </div>
                         <div class="col-md-4 mb-3">
                             <input type="submit" class="btn btn-success" value="Save"/>
-                            <input type="button" class="btn btn-secondary" value="Cancel"/>
+                            <input type="button" class="btn btn-secondary" value="Cancel" @onclick="Cancel"/>
                         </div>
                         <div class="col-md-4 mb-3">
                         </div>
@@ -39,6 +43,10 @@
                         <div class="col-md-12 mb-3">
                             <label for="">Client</label>
                             <InputSelect class="form-select" @bind-Value="@Order.ClientId">
+                                @foreach(var item in Clients)
+                                {
+                                    <option value="@item.Id">@(item.FirstName+", "+item.FirstName)</option> 
+                                }
 
 
                             </InputSelect>
@@ -127,6 +135,7 @@ else
     public Order Order;
     public IEnumerable<ProductCategory> productCategories;
     public IEnumerable<Product> Products { get; set; }
+    public IEnumerable<Client> Clients { get; set; }
     public string ProductId { get; set; }
     public string Message { get; set; }
 
@@ -135,9 +144,15 @@ else
     {
         try
         {
-            Order = new Order() {ProductCategoryId = 1};
+            Order = new Order() {
+                ProductCategoryId = 1,
+                OrderDate = DateTime.Today,
+                DeliveryDate = DateTime.Today.AddDays(7)
+                };
             productCategories = await ProductCategoryService.GetProductCategories();
             await LoadProducts(Order.ProductCategoryId);
+
+            Clients = await clientService.GetClient();
         }
         catch (Exception e)
         {
@@ -160,5 +175,25 @@ else
     {
         Products = await ProductService.GetByCategory(productCategoryId);
     }
+
+
+    protected async Task SaveOrder()
+    {
+        await orderService.SaveOrder(Order);
+        NavigateToHome();
+    }
+
+    private void NavigateToHome()
+    {
+        nav.NavigateTo("/");
+
+    }
+
+    protected void Cancel()
+    {
+        NavigateToHome();
+    }
+
+
 
 }

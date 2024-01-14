@@ -3,9 +3,11 @@ using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Blazor.FurnitureStore.Shared;
 using System;
+using Microsoft.AspNetCore.Authorization;
 
 namespace Blazor.FurnitureStore.Server.Controllers
 {
+    [Authorize]
     [Route("api/[controller]")]
     [ApiController]
     public class ClientController : ControllerBase

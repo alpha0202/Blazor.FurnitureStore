@@ -1,4 +1,6 @@
 ﻿
+using System.Net.Http.Json;
+
 namespace Blazor.FurnitureStore.Client.Services
 {
     public class ClientService : IClientService
@@ -9,9 +11,9 @@ namespace Blazor.FurnitureStore.Client.Services
         {
             _httpClient = httpClient;
         }
-        public Task<IEnumerable<FurnitureStore.Shared.Client>> GetClient()
+        public async Task<IEnumerable<FurnitureStore.Shared.Client>> GetClient()
         {
-            throw new NotImplementedException();
+            return await _httpClient.GetFromJsonAsync<IEnumerable<FurnitureStore.Shared.Client>>($"api/client");
         }
     }
 }

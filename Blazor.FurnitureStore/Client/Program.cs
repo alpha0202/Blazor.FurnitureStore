@@ -3,6 +3,7 @@ using Blazor.FurnitureStore.Client.Services;
 using Microsoft.AspNetCore.Components.Web;
 using Microsoft.AspNetCore.Components.WebAssembly.Authentication;
 using Microsoft.AspNetCore.Components.WebAssembly.Hosting;
+using MudBlazor.Services;
 using Radzen;
 
 namespace Blazor.FurnitureStore.Client
@@ -30,6 +31,7 @@ namespace Blazor.FurnitureStore.Client
             builder.Services.AddApiAuthorization();
 
             builder.Services.AddRadzenComponents();
+            builder.Services.AddMudServices();
 
             await builder.Build().RunAsync();
         }
