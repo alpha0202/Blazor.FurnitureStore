@@ -16,5 +16,7 @@ namespace Blazor.FurnitureStore.Shared
         public decimal Total { get; set; }
         public int ProductCategoryId { get; set; }
 
+        public List<Product> Products { get; set; }
+
     }
 }

@@ -1,15 +1,14 @@
 ﻿@page "/orderdetails"
 
-@inject IProductCategoryService ProductCategoryService
-@inject IProductService ProductService
 @inject IClientService clientService
 @inject IOrderService orderService
+@inject IDialogService dialogService
 @attribute [Authorize]
 @inject NavigationManager nav
 
 <p><strong>@Message</strong></p>
 
-@if (productCategories != null && Order != null)
+@if (Clients != null && Order != null)
 {
     <div class="card" style="width: 55rem;">
         <h5 class="card-title">Order Details</h5>
@@ -65,24 +64,18 @@
                         </div>
                        
                     </div>
+                    <div class="row">
+                        <div class="col-md-4 mb-3">
+                        </div>
+                        <div class="col-md-4 mb-3">
+                            <input type="button" class="btn btn-secondary" value="Add Product" @onclick="AddProduct" />
+                        </div>
+                        <div class="col-md-4 mb-3">
+                        </div>
+                    </div>
                 </div>
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+@* 
                 <div class="container" style="width: 18rem;align-items:start">
                     <h5 class="card-title">Categories</h5>
                     <InputSelect class="form-select col-sm-5"
@@ -107,7 +100,7 @@
 
                     </InputSelect>
 
-                </div>
+                </div> *@
 
 
             </EditForm>
@@ -133,11 +126,8 @@ else
 
 @code {
     public Order Order;
-    public IEnumerable<ProductCategory> productCategories;
-    public IEnumerable<Product> Products { get; set; }
-    public IEnumerable<Client> Clients { get; set; }
-    public string ProductId { get; set; }
     public string Message { get; set; }
+    public IEnumerable<Client> Clients { get; set; }
 
 
     protected override async Task OnInitializedAsync()
@@ -149,8 +139,6 @@ else
                 OrderDate = DateTime.Today,
                 DeliveryDate = DateTime.Today.AddDays(7)
                 };
-            productCategories = await ProductCategoryService.GetProductCategories();
-            await LoadProducts(Order.ProductCategoryId);
 
             Clients = await clientService.GetClient();
         }
@@ -161,20 +149,7 @@ else
         }
     }
 
-    protected async Task ProductCategoryHasChanged(int productCategoryId)
-    {
-        Order.ProductCategoryId = productCategoryId;
 
-        if (Order.ProductCategoryId > 0)
-            await LoadProducts(Order.ProductCategoryId);
-
-
-    }
-
-    private async Task LoadProducts(int productCategoryId)
-    {
-        Products = await ProductService.GetByCategory(productCategoryId);
-    }
 
 
     protected async Task SaveOrder()
@@ -194,6 +169,23 @@ else
         NavigateToHome();
     }
 
+
+    protected async Task AddProduct()
+    {
+        var dialog = dialogService.Show<ProductDetails>("Product Detail");
+        var result = await dialog.Result;
+
+        if(!result.Canceled)
+        {
+            var product = (Product)result.Data;
+
+            if (Order.Products is null)
+                Order.Products = new List<Product>();
+
+            Order.Products.Add(product);
+        }
+
+    }
 
 
 }
